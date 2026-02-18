@@ -14,9 +14,6 @@ MemoryPatch g_Patch5;
 
 bool g_bEnabled = false;
 
-ConVar g_cvMinPlayers = null;
-Handle g_hCheckTimer = null;
-
 public Plugin myinfo =
 {
     name        = "[L4D2] LobbyReserve (WINDOWS)",
@@ -28,16 +25,6 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
-    g_cvMinPlayers = CreateConVar(
-        "l4d2_lobbyreserve_minplayers",
-        "1",
-        "Minimum number of real players required to ENABLE LobbyReserve patches (0 = always enabled).",
-        FCVAR_NOTIFY,
-        true, 0.0,
-        true, 32.0
-    );
-    HookConVarChange(g_cvMinPlayers, OnMinPlayersChanged);
-
     g_hGameConf = LoadGameConfigFile("l4d2_lobbyreserve_runtime_windows");
     if (!g_hGameConf)
     {
@@ -55,35 +42,6 @@ public void OnPluginStart()
         SetFailState("Patch validation failed (Windows).");
     }
 
-    StartPeriodicCheck();
-    CheckPlayerState();
-}
-
-public void OnMapStart()
-{
-    StartPeriodicCheck();
-    CheckPlayerState();
-}
-
-void StartPeriodicCheck()
-{
-    if (g_hCheckTimer != null)
-    {
-        KillTimer(g_hCheckTimer);
-        g_hCheckTimer = null;
-    }
-
-    g_hCheckTimer = CreateTimer(30.0, Timer_CheckPlayers, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
-}
-
-public Action Timer_CheckPlayers(Handle timer)
-{
-    CheckPlayerState();
-    return Plugin_Continue;
-}
-
-public void OnMinPlayersChanged(ConVar convar, const char[] oldValue, const char[] newValue)
-{
     CheckPlayerState();
 }
 
@@ -126,12 +84,28 @@ void DisablePatches()
     LogMessage("LobbyReserve patches DISABLED (WINDOWS)");
 }
 
+public void OnClientPutInServer(int client)
+{
+    if (!IsRealPlayer(client))
+        return;
+
+    CheckPlayerState();
+}
+
+public void OnClientDisconnect(int client)
+{
+    CreateTimer(0.5, Timer_CheckEmpty, _, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public Action Timer_CheckEmpty(Handle timer)
+{
+    CheckPlayerState();
+    return Plugin_Stop;
+}
+
 void CheckPlayerState()
 {
-    int nPlayers = GetRealPlayerCount();
-    int nMinPlayers = g_cvMinPlayers.IntValue;
-
-    if (nPlayers >= nMinPlayers)
+    if (GetRealPlayerCount() > 0)
     {
         EnablePatches();
     }
@@ -165,12 +139,6 @@ bool IsRealPlayer(int client)
 
 public void OnPluginEnd()
 {
-    if (g_hCheckTimer != null)
-    {
-        KillTimer(g_hCheckTimer);
-        g_hCheckTimer = null;
-    }
-
     DisablePatches();
 
     if (g_hGameConf)
