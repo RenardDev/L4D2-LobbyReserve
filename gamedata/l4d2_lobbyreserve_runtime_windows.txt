@@ -1,0 +1,99 @@
+"Games"
+{
+    "left4dead2"
+    {
+        "Signatures"
+        {
+            "Sig1"
+            {
+                "library"   "engine"
+                "windows"   "\x74\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x79\x2A\x2A\x2A\x2A\x2A\x15"
+                // 74 ? ? ? ? ? ? ? ? 79 ? ? ? ? ? 15
+            }
+
+            "Sig2"
+            {
+                "library"   "engine"
+                "windows"   "\x2A\x2A\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\x52\x2A\x8D"
+                // ? ? ? ? ? ? A1 ? ? ? ? 52 ? 8D
+            }
+
+            "Sig3"
+            {
+                "library"   "engine"
+                "windows"   "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xCF\x74\x2A\x51"
+                // ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? CF 74 ? 51
+            }
+
+            "Sig4"
+            {
+                "library"   "engine"
+                "windows"   "\x74\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x8B\x8B\x2A\x2A\x2A\x2A\x3B"
+                // 74 ? ? ? ? ? ? ? 8B 8B ? ? ? ? 3B
+            }
+
+            "Sig5"
+            {
+                "library"   "engine"
+                "windows"   "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xCF\x74\x2A\xD9"
+                // ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? CF 74 ? D9
+            }
+        }
+
+        "MemPatches"
+        {
+            "Patch1"
+            {
+                "signature" "Sig1"
+                "windows"
+                {
+                    "offset"    "0"
+                    "verify"    "74"
+                    "patch"     "EB"
+                }
+            }
+
+            "Patch2"
+            {
+                "signature" "Sig2"
+                "windows"
+                {
+                    "offset"    "0"
+                    "patch"     "BA 00 00 00 00 B8 00 00 00 00 90"
+                }
+            }
+
+            "Patch3"
+            {
+                "signature" "Sig3"
+                "windows"
+                {
+                    "offset"    "0"
+                    "verify"    "74"
+                    "patch"     "EB"
+                }
+            }
+
+            "Patch4"
+            {
+                "signature" "Sig4"
+                "windows"
+                {
+                    "offset"    "0"
+                    "verify"    "74"
+                    "patch"     "EB"
+                }
+            }
+
+            "Patch5"
+            {
+                "signature" "Sig5"
+                "windows"
+                {
+                    "offset"    "0"
+                    "patch"     "EB"
+                }
+            }
+        }
+    }
+}
