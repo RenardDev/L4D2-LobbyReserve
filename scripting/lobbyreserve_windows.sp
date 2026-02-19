@@ -11,6 +11,7 @@ MemoryPatch g_Patch2;
 MemoryPatch g_Patch3;
 MemoryPatch g_Patch4;
 MemoryPatch g_Patch5;
+MemoryPatch g_Patch6;
 
 bool g_bEnabled = false;
 
@@ -19,7 +20,7 @@ public Plugin myinfo =
     name        = "[L4D2] LobbyReserve (WINDOWS)",
     author      = "Ren",
     description = "",
-    version     = "1.0.0",
+    version     = "1.0.1",
     url         = ""
 };
 
@@ -36,6 +37,7 @@ public void OnPluginStart()
     g_Patch3 = MemoryPatch.CreateFromConf(g_hGameConf, "Patch3");
     g_Patch4 = MemoryPatch.CreateFromConf(g_hGameConf, "Patch4");
     g_Patch5 = MemoryPatch.CreateFromConf(g_hGameConf, "Patch5");
+    g_Patch6 = MemoryPatch.CreateFromConf(g_hGameConf, "Patch6");
 
     if (!ValidateAll())
     {
@@ -51,7 +53,8 @@ bool ValidateAll()
         && g_Patch2.Validate()
         && g_Patch3.Validate()
         && g_Patch4.Validate()
-        && g_Patch5.Validate();
+        && g_Patch5.Validate()
+        && g_Patch6.Validate();
 }
 
 void EnablePatches()
@@ -64,6 +67,7 @@ void EnablePatches()
     g_Patch3.Enable();
     g_Patch4.Enable();
     g_Patch5.Enable();
+    g_Patch6.Enable();
 
     g_bEnabled = true;
     LogMessage("LobbyReserve patches ENABLED (WINDOWS)");
@@ -79,6 +83,7 @@ void DisablePatches()
     g_Patch3.Disable();
     g_Patch4.Disable();
     g_Patch5.Disable();
+    g_Patch6.Disable();
 
     g_bEnabled = false;
     LogMessage("LobbyReserve patches DISABLED (WINDOWS)");

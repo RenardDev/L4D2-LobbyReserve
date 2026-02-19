@@ -38,6 +38,13 @@
                 "windows"   "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xCF\x74\x2A\xD9"
                 // ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? CF 74 ? D9
             }
+
+            "Sig6"
+            {
+                "library"   "engine"
+                "windows"   "\x2A\x45\x2A\x2A\x2A\x84\x2A\x2A\x2A\x2A\x8B\x45"
+                // ? 45 ? ? ? 84 ? ? ? ? 8B 45
+            }
         }
 
         "MemPatches"
@@ -92,6 +99,16 @@
                 {
                     "offset"    "0"
                     "patch"     "EB"
+                }
+            }
+
+            "Patch6"
+            {
+                "signature" "Sig6"
+                "windows"
+                {
+                    "offset"    "3"
+                    "patch"     "01"
                 }
             }
         }

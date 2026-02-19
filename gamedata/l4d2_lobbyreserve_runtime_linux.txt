@@ -21,15 +21,22 @@
             "Sig3"
             {
                 "library"   "engine"
-                "linux"     "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x95\x2A\x2A\x2A\x2A\x8B\x82"
-                // ? ? ? ? ? ? ? 95 ? ? ? ? 8B 82
+                "linux"     "\x2A\x84\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x24\xE8\x2A\x2A\x2A\x2A\x2A\x95"
+                // ? 84 ? ? ? ? ? ? ? ? ? ? ? ? ? ? 24 E8 ? ? ? ? ? 95
             }
 
             "Sig4"
             {
                 "library"   "engine"
-                "linux"     "\x2A\x84\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x24\xE8\x2A\x2A\x2A\x2A\x2A\x95"
-                // ? 84 ? ? ? ? ? ? ? ? ? ? ? ? ? ? 24 E8 ? ? ? ? ? 95
+                "linux"     "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x85\x2A\x2A\x2A\x2A\x2A\x0F\x2A\x88"
+                // ? ? ? ? ? ? ? 85 ? ? ? ? ? 0F ? 88
+            }
+
+            "Sig5"
+            {
+                "library"   "engine"
+                "linux"     "\x2A\x45\x2A\x2A\x89\xD3"
+                // ? 45 ? ? 89 D3
             }
         }
 
@@ -63,7 +70,7 @@
                 "linux"
                 {
                     "offset"    "0"
-                    "patch"     "90 90 90 90 90 90"
+                    "patch"     "E9 E0 FE FF FF 90"
                 }
             }
 
@@ -73,7 +80,17 @@
                 "linux"
                 {
                     "offset"    "0"
-                    "patch"     "E9 E0 FE FF FF 90"
+                    "patch"     "E9 58 F7 FF FF 90"
+                }
+            }
+
+            "Patch5"
+            {
+                "signature" "Sig5"
+                "linux"
+                {
+                    "offset"    "3"
+                    "patch"     "01"
                 }
             }
         }
